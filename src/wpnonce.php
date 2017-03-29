@@ -1,8 +1,8 @@
 <?php
 
-namespace src;
+namespace Mywpnonces\src\wpnonce;
 
-class MYWPNonce 
+class wpnonces 
 {
 
      private $action;
@@ -19,7 +19,7 @@ class MYWPNonce
 
      public function createNonce() {
          
-          if(!function_exists('wp_create_nonce()')) { return false; }
+          if(!function_exists('wp_create_nonce')) { return false; }
 
           return wp_create_nonce($this->action);
 
@@ -27,7 +27,7 @@ class MYWPNonce
 
      public function retriveNonceField() {
 
-          if(!function_exists('wp_nonce_field()')) { return false; }
+          if(!function_exists('wp_nonce_field')) { return false; }
 
           $name = '_wpnonce';
           $referer = true;

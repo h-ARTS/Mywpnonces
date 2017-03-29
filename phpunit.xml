@@ -13,7 +13,7 @@
 
     <testsuites>
         <testsuite name="My WPNonce tests">
-            <directory>./tests/</directory>
+            <directory>./src/tests</directory>
         </testsuite>
     </testsuites>
 
