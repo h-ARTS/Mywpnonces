@@ -101,6 +101,29 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
 
      }
 
+     public function testCheckAdminReferer() {
+
+          $action        = 'my_action';
+          $query_arg     = '_wpnonce';
+
+          $myWPNonce = new test\MY_WP_Nonces( $action );
+
+          \WP_Mock::userFunction( 'check_admin_referer', array( 
+
+               'times'             =>   3,
+               'return_in_order'   =>  array( 1, 2, false )
+
+          ) );
+          
+          $this->assertFalse($myWPNonce->checkAdminReferer( 'my_query' ) );
+
+          $this->assertEquals(1, $myWPNonce->checkAdminReferer( $query_arg ) );
+
+          $this->assertEquals(2, $myWPNonce->checkAdminReferer( $query_arg ) );
+
+
+     }
+
 }
 
 

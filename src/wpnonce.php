@@ -12,7 +12,7 @@ class MY_WP_Nonces {
 
      }
 
-     public function get_the_action() {
+     public function the_action() {
 
           return $this->action;
 
