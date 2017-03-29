@@ -58,6 +58,14 @@ class MY_WP_Nonces {
 
      }
 
+     public function checkAjaxReferer( $query_arg = false, $die = true ) {
+
+          if( ! function_exists( 'check_ajax_referer' ) ) { return false; }
+
+          return check_ajax_referer( $this->action, $query_arg, $die );
+
+     }
+
 }
 
 ?>
