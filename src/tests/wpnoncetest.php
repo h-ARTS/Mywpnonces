@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Mywpnonces\src\wpnonce as wpnoncefile;
+use Mywpnonces\src\wpnonce as test;
 
 
 class MYWPNonceTest extends \PHPUnit_Framework_TestCase
@@ -9,6 +9,7 @@ class MYWPNonceTest extends \PHPUnit_Framework_TestCase
 
      public function setUp() {
           \WP_Mock::setUp();
+          require_once './src/wpnonce.php';
      }
 
      public function tearDown() {
@@ -20,7 +21,7 @@ class MYWPNonceTest extends \PHPUnit_Framework_TestCase
           $action = 'my_action';
           $nonce = '4832552f';
 
-          $myWPNonce = new wpnoncefile\wpnonces($action);
+          $myWPNonce = new test\wpnonces($action);
 
           \WP_Mock::userFunction('wp_create_nonce', array(
 

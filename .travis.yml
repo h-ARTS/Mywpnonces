@@ -7,4 +7,4 @@ before_script:
   - composer install
 
 script:
-  - phpunit src/tests/wpnoncetest.php
+  - phpunit
