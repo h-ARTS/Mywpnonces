@@ -111,15 +111,15 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
           \WP_Mock::userFunction( 'check_admin_referer', array( 
 
                'times'             =>   3,
-               'return_in_order'   =>  array( 1, 2, false )
+               'return_in_order'   =>  array( false, 1, 2 )
 
           ) );
-          
-          $this->assertFalse($myWPNonce->checkAdminReferer( 'my_query' ) );
 
-          $this->assertEquals(1, $myWPNonce->checkAdminReferer( $query_arg ) );
+          $this->assertFalse( $myWPNonce->checkAdminReferer( 'my_query' ) );
 
-          $this->assertEquals(2, $myWPNonce->checkAdminReferer( $query_arg ) );
+          $this->assertEquals( 1, $myWPNonce->checkAdminReferer( $query_arg ) );
+
+          $this->assertEquals( 2, $myWPNonce->checkAdminReferer( $query_arg ) );
 
 
      }
