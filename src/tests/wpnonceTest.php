@@ -34,6 +34,29 @@ class MYWPNonceTest extends \PHPUnit_Framework_TestCase
 
      }
 
+     public function testRetriveNonceField() {
+
+          $action = 'my_action';
+          $name = '_wpnonce';
+          $referer = true;
+          $echo = true;
+          $nonce = '4832552f';
+
+          $nonce_field = '<input type="hidden" id"_wpnonce" name="_wpnonce" value="4832552f" />';
+
+          $myWPNonce = new test\wpnonces($action, $name, $referer, $echo);
+
+          \WP_Mock::userFunction('wp_nonce_field', array(
+
+               'times'   =>   1,
+               'return'  =>   '<input type="hidden" id"' . $name . '" name="' . $name . '" value="' . $nonce . '" />'
+
+          ) );
+
+          $this->assertEquals($nonce_field, $myWPNonce->retriveNonceField());
+
+     }
+
 }
 
 
