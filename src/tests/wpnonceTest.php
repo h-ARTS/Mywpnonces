@@ -106,7 +106,7 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
           $action        = 'my_action';
           $query_arg     = '_wpnonce';
 
-          $myWPNonce = new test\MY_WP_Nonces( $action );
+          $myWPNonce     = new test\MY_WP_Nonces( $action );
 
           \WP_Mock::userFunction( 'check_admin_referer', array( 
 
@@ -122,10 +122,10 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
 
      public function testCheckAjaxReferer() {
 
-          $action = 'my_action';
-          $query_arg = '_wpnonce';
+          $action        = 'my_action';
+          $query_arg     = '_wpnonce';
 
-          $myWPNonce = new test\MY_WP_Nonces( $action );
+          $myWPNonce     = new test\MY_WP_Nonces( $action );
 
           \WP_Mock::userFunction( 'check_ajax_referer', array( 
 
@@ -134,7 +134,24 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
 
           ) );
 
-          $this->assertTrue( $myWPNonce->checkAjaxReferer($query_arg) );
+          $this->assertTrue( $myWPNonce->checkAjaxReferer( $query_arg ) );
+
+     }
+
+     public function testAreYouSure() {
+
+          $action        = 'my_action';
+
+          $myWPNonce     = new test\MY_WP_Nonces( $action );
+
+          \WP_Mock::userFunction( 'wp_nonce_ays', array( 
+
+               'times'   =>   1,
+               'return'  =>   true
+
+          ) );
+
+          $this->assertTrue( $myWPNonce->areYouSure() );
 
      }
 
