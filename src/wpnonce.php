@@ -50,6 +50,14 @@ class MY_WP_Nonces {
 
      }
 
+     public function checkAdminReferer( $query_arg = '_wpnonce' ) {
+
+          if( ! function_exists( 'check_admin_referer' ) ) { return false; }
+
+          return check_admin_referer( $this->action, $query_arg );
+
+     }
+
 }
 
 ?>
