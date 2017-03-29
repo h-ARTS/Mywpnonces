@@ -4,26 +4,30 @@ use PHPUnit\Framework\TestCase;
 use Mywpnonces\src\wpnonce as test;
 
 
-class MYWPNonceTest extends \PHPUnit_Framework_TestCase
+class MYWPNonce_Test extends \PHPUnit_Framework_TestCase
 {
 
      public function setUp() {
+
           \WP_Mock::setUp();
+
           require_once './src/wpnonce.php';
+
      }
 
      public function tearDown() {
+
           \WP_Mock::tearDown();
+
      }
 
      public function testCreateNonce() {
 
-          $action = 'my_action';
-          $nonce = '4832552f';
+          $action   = 'my_action';
+          $nonce    = '4832552f';
+          $myWPNonce = new test\MY_WP_Nonces( $action );
 
-          $myWPNonce = new test\wpnonces($action);
-
-          \WP_Mock::userFunction('wp_create_nonce', array(
+          \WP_Mock::userFunction( 'wp_create_nonce', array(
 
                'times'   =>   1,
                'return'  =>   $nonce
@@ -34,26 +38,25 @@ class MYWPNonceTest extends \PHPUnit_Framework_TestCase
 
      }
 
-     public function testRetriveNonceField() {
+     public function testGetNonceField() {
 
-          $action = 'my_action';
-          $name = '_wpnonce';
-          $referer = true;
-          $echo = true;
-          $nonce = '4832552f';
+          $action   = 'my_action';
+          $name     = '_wpnonce';
+          $referer  = true;
+          $echo     = true;
+          $nonce    = '4832552f';
+          $myWPNonce = new test\MY_WP_Nonces( $action );
 
           $nonce_field = '<input type="hidden" id"_wpnonce" name="_wpnonce" value="4832552f" />';
 
-          $myWPNonce = new test\wpnonces($action);
-
-          \WP_Mock::userFunction('wp_nonce_field', array(
+          \WP_Mock::userFunction( 'wp_nonce_field', array(
 
                'times'   =>   1,
                'return'  =>   '<input type="hidden" id"' . $name . '" name="' . $name . '" value="' . $nonce . '" />'
 
           ) );
 
-          $this->assertEquals($nonce_field, $myWPNonce->retriveNonceField($name));
+          $this->assertEquals( $nonce_field, $myWPNonce->getNonceField( $name ) );
 
      }
 
@@ -61,21 +64,20 @@ class MYWPNonceTest extends \PHPUnit_Framework_TestCase
 
           $action = 'my_action';
           $nonce = '4832552f';
+          $myWPNonce = new test\MY_WP_Nonces( $action );
 
-          $myWPNonce = new test\wpnonces($action);
-
-          \WP_Mock::userFunction('wp_verify_nonce', array( 
+          \WP_Mock::userFunction( 'wp_verify_nonce', array( 
 
                'times'             =>   3,
                'return_in_order'   =>   array(false, 1, 2)
 
           ) );
 
-          $this->assertFalse($myWPNonce->verifyNonce('3325648f'));
+          $this->assertFalse( $myWPNonce->verifyNonce( '3325648f' ) );
 
-          $this->assertEquals(1, $myWPNonce->verifyNonce($nonce));
+          $this->assertEquals( 1, $myWPNonce->verifyNonce( $nonce ) );
 
-          $this->assertEquals(2, $myWPNonce->verifyNonce($nonce));
+          $this->assertEquals( 2, $myWPNonce->verifyNonce( $nonce ) );
 
      }
 
