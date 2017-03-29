@@ -66,14 +66,6 @@ class MY_WP_Nonces {
 
      }
 
-     public function getRefererField( $echo = true ) {
-
-          if( ! function_exists( 'wp_referer_field' ) ) { return false; }
-
-          return wp_referer_field( $echo );
-
-     }
-
 }
 
 ?>
