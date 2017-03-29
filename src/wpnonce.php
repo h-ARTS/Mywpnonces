@@ -2,8 +2,7 @@
 
 namespace Mywpnonces\src\wpnonce;
 
-class MY_WP_Nonces 
-{
+class MY_WP_Nonces {
 
      private $action;
 
@@ -27,13 +26,9 @@ class MY_WP_Nonces
 
      }
 
-     public function getNonceField( $name ) {
+     public function getNonceField( $name = '_wpnonce', $referer = true, $echo = true ) {
 
           if( ! function_exists( 'wp_nonce_field') || empty( $name ) || !is_string( $name ) ) { return false; }
-
-          $name     = '_wpnonce';
-          $referer  = true;
-          $echo     = true;
 
           return wp_nonce_field( $this->action, $name, $referer, $echo );
 
@@ -47,11 +42,9 @@ class MY_WP_Nonces
 
      }
 
-     public function getNonceUrl( $actionurl, $name ) {
+     public function getNonceUrl( $actionurl, $name = '_wpnonce') {
 
-          if( ! function_exists( 'wp_nonce_url' ) || empty($actionurl) || !is_string( $actionurl ) || !is_string( $name ) ) { return false; }
-
-          $name = '_wpnonce';
+          if( ! function_exists( 'wp_nonce_url' ) || empty($actionurl) || !is_string( $actionurl ) ) { return false; }
 
           return wp_nonce_url( $actionurl, $this->action, $name );
 

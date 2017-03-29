@@ -4,8 +4,7 @@ use PHPUnit\Framework\TestCase;
 use Mywpnonces\src\wpnonce as test;
 
 
-class MYWPNonce_Test extends \PHPUnit_Framework_TestCase
-{
+class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
 
      public function setUp() {
 
@@ -23,9 +22,10 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase
 
      public function testCreateNonce() {
 
-          $action   = 'my_action';
-          $nonce    = '4832552f';
-          $myWPNonce = new test\MY_WP_Nonces( $action );
+          $action        = 'my_action';
+          $nonce         = '4832552f';
+
+          $myWPNonce     = new test\MY_WP_Nonces( $action );
 
           \WP_Mock::userFunction( 'wp_create_nonce', array(
 
@@ -40,12 +40,11 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase
 
      public function testGetNonceField() {
 
-          $action   = 'my_action';
-          $name     = '_wpnonce';
-          $referer  = true;
-          $echo     = true;
-          $nonce    = '4832552f';
-          $myWPNonce = new test\MY_WP_Nonces( $action );
+          $action        = 'my_action';
+          $name          = '_wpnonce';
+          $nonce         = '4832552f';
+
+          $myWPNonce     = new test\MY_WP_Nonces( $action );
 
           $nonce_field = '<input type="hidden" id"_wpnonce" name="_wpnonce" value="4832552f" />';
 
@@ -62,9 +61,10 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase
 
      public function testVerifyNonce() {
 
-          $action = 'my_action';
-          $nonce = '4832552f';
-          $myWPNonce = new test\MY_WP_Nonces( $action );
+          $action        = 'my_action';
+          $nonce         = '4832552f';
+
+          $myWPNonce     = new test\MY_WP_Nonces( $action );
 
           \WP_Mock::userFunction( 'wp_verify_nonce', array( 
 
@@ -78,6 +78,26 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase
           $this->assertEquals( 1, $myWPNonce->verifyNonce( $nonce ) );
 
           $this->assertEquals( 2, $myWPNonce->verifyNonce( $nonce ) );
+
+     }
+
+     public function testGetNonceUrl() {
+
+          $actionurl     = 'http://www.testweb.ch/wp-admin/post.php?post=1&action=trash';
+          $action        = 'my_action';
+          $name          = '_wpnonce';
+          $nonce         = '4832552f';
+
+          $myWPNonce     = new test\MY_WP_Nonces( $action );
+
+          \WP_Mock::userFunction( 'wp_nonce_url', array( 
+
+               'times'        =>   1,
+               'return'       =>   $actionurl . '&' . $name . '=' . $nonce 
+
+          ) );
+
+          $this->assertEquals( 'http://www.testweb.ch/wp-admin/post.php?post=1&action=trash&_wpnonce=4832552f', $myWPNonce->getNonceUrl( $actionurl ) );
 
      }
 
