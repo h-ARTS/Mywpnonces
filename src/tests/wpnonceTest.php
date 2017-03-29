@@ -46,12 +46,12 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
 
           $myWPNonce     = new test\MY_WP_Nonces( $action );
 
-          $nonce_field = '<input type="hidden" id"_wpnonce" name="_wpnonce" value="4832552f" />';
+          $nonce_field = '<input type="hidden" id="_wpnonce" name="_wpnonce" value="4832552f" />';
 
           \WP_Mock::userFunction( 'wp_nonce_field', array(
 
                'times'   =>   1,
-               'return'  =>   '<input type="hidden" id"' . $name . '" name="' . $name . '" value="' . $nonce . '" />'
+               'return'  =>   sprintf( '<input type="hidden" id="%s" name="%s" value="%s" />', $name, $name, $nonce )
 
           ) );
 
@@ -93,11 +93,11 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
           \WP_Mock::userFunction( 'wp_nonce_url', array( 
 
                'times'        =>   1,
-               'return'       =>   $actionurl . '&' . $name . '=' . $nonce 
+               'return'       =>   sprintf( $actionurl . '&%s=%s', $name, $nonce )
 
           ) );
 
-          $this->assertEquals( 'http://www.testweb.ch/wp-admin/post.php?post=1&action=trash&_wpnonce=4832552f', $myWPNonce->getNonceUrl( $actionurl ) );
+          $this->assertEquals( sprintf( $actionurl . '&%s=%s', $name, $nonce ), $myWPNonce->getNonceUrl( $actionurl ) );
 
      }
 
@@ -110,17 +110,31 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
 
           \WP_Mock::userFunction( 'check_admin_referer', array( 
 
-               'times'             =>   3,
-               'return_in_order'   =>  array( false, 1, 2 )
+               'times'    =>   1,
+               'return'   =>  true
 
           ) );
 
-          $this->assertFalse( $myWPNonce->checkAdminReferer( 'my_query' ) );
+          $this->assertTrue( $myWPNonce->checkAdminReferer( $query_arg ) );
 
-          $this->assertEquals( 1, $myWPNonce->checkAdminReferer( $query_arg ) );
 
-          $this->assertEquals( 2, $myWPNonce->checkAdminReferer( $query_arg ) );
+     }
 
+     public function testCheckAjaxReferer() {
+
+          $action = 'my_action';
+          $query_arg = '_wpnonce';
+
+          $myWPNonce = new test\MY_WP_Nonces( $action );
+
+          \WP_Mock::userFunction( 'check_ajax_referer', array( 
+
+               'times'    =>   1,
+               'return'   =>   true
+
+          ) );
+
+          $this->assertTrue( $myWPNonce->checkAjaxReferer($query_arg) );
 
      }
 
