@@ -53,7 +53,7 @@ class MYWPNonceTest extends \PHPUnit_Framework_TestCase
 
           ) );
 
-          $this->assertEquals($nonce_field, $myWPNonce->retriveNonceField());
+          $this->assertEquals($nonce_field, $myWPNonce->retriveNonceField($name));
 
      }
 

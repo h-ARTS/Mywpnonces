@@ -25,9 +25,9 @@ class wpnonces
 
      }
 
-     public function retriveNonceField() {
+     public function retriveNonceField($name) {
 
-          if(!function_exists('wp_nonce_field')) { return false; }
+          if(!function_exists('wp_nonce_field') || empty($name) || !is_string($name)) { return false; }
 
           $name = '_wpnonce';
           $referer = true;
