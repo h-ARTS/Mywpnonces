@@ -37,6 +37,14 @@ class wpnonces
 
      }
 
+     public function verifyNonce($nonce) {
+
+          if(!function_exists('wp_verify_nonce') || empty($nonce) || !is_string($nonce)) { return false; }
+
+          return wp_verify_nonce( $nonce, $this->action );
+
+     }
+
 }
 
 ?>
