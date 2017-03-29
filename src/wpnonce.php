@@ -66,6 +66,14 @@ class MY_WP_Nonces {
 
      }
 
+     public function areYouSure() {
+
+          if( ! function_exists( 'wp_nonce_ays' ) ) { return false; }
+          
+          return wp_nonce_ays( $this->action );
+
+     }
+
 }
 
 ?>
