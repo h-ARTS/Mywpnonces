@@ -26,7 +26,7 @@ $myNonces->createNonce();
 ```php
 $myNonce->getNonceField( 'the_name_of_nonce', true, true );
 ```
-*Parameters are optional*
+*3 Parameters are optional*
 
 **Help:** [wp_nonce_field()](https://developer.wordpress.org/reference/functions/wp_nonce_field)
 
@@ -37,7 +37,7 @@ $myNonce->getNonceField( 'the_name_of_nonce', true, true );
 ```php
 $myNonce->verifyNonce( $nonce );
 ```
-*Parameter is required!*
+*1 Parameter is required!*
 
 **Help:** [wp_verify_nonce()](https://developer.wordpress.org/reference/functions/wp_verify_nonce)
 
@@ -54,6 +54,17 @@ $myNonce->getNonceUrl( $target_url, 'the_name_of_nonce' );
 **Help:** [wp_nonce_url()](https://developer.wordpress.org/reference/functions/wp_nonce_url)
 
 ---------------
+
+### Checking if the referred user has valid nonce
+
+```php
+$myNonce->checkAdminReferer( '_security' );
+```
+*1 Parameter is optional*
+
+**Help:** [check_admin_referer()](https://developer.wordpress.org/reference/functions/check_admin_referer)
+
+--------------
 
 ## Whats missing currently?
 
