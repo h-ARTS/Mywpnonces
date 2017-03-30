@@ -5,14 +5,13 @@
 MYWPNonces is a Library with WordPress Nonce functions in object-oriented way.
 
 ## How to use
--------------
 
 Declare a new instance:
 ```php
 $myNonces = new MY_WP_Nonces( 'myAction' );
 ```
 
-#### Creating Nonce
+### Creating Nonce
 
 ```php
 $myNonces->createNonce();
@@ -20,7 +19,9 @@ $myNonces->createNonce();
 
 **Help:** [wp_create_nonce()](https://developer.wordpress.org/reference/functions/wp_create_nonce)
 
-#### Creating Nonce Field
+---------------
+
+### Creating Nonce Field
 
 ```php
 $myNonce->getNonceField( 'the_name_of_nonce', true, true );
@@ -29,7 +30,9 @@ $myNonce->getNonceField( 'the_name_of_nonce', true, true );
 
 **Help:** [wp_nonce_field()](https://developer.wordpress.org/reference/functions/wp_nonce_field)
 
-#### Verifying Nonce
+---------------
+
+### Verifying Nonce
 
 ```php
 $myNonce->verifyNonce( $nonce );
@@ -38,7 +41,9 @@ $myNonce->verifyNonce( $nonce );
 
 **Help:** [wp_verify_nonce()](https://developer.wordpress.org/reference/functions/wp_verify_nonce)
 
-#### Creating Nonce Url *with given parameter*
+---------------
+
+### Creating Nonce Url *with given parameter*
 
 ```php
 $target_url = 'https://www.example.com/wp-admin/trash-something';
@@ -48,7 +53,8 @@ $myNonce->getNonceUrl( $target_url, 'the_name_of_nonce' );
 
 **Help:** [wp_nonce_url()](https://developer.wordpress.org/reference/functions/wp_nonce_url)
 
+---------------
+
 ## Whats missing currently?
----------------------------
 
 - Code Documentation
