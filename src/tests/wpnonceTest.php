@@ -73,7 +73,7 @@ class MYWPNonce_Test extends \PHPUnit_Framework_TestCase {
 
           ) );
 
-          $this->assertFalse( $myWPNonce->verifyNonce( '3325648f' ) );
+          $this->assertFalse( $myWPNonce->verifyNonce('something') );
 
           $this->assertEquals( 1, $myWPNonce->verifyNonce( $nonce ) );
 
