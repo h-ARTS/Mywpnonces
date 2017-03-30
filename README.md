@@ -8,7 +8,7 @@ MYWPNonces is a Library with WordPress Nonce functions in object-oriented way.
 
 Declare a new instance:
 ```php
-$myNonces = new MY_WP_Nonces( 'myAction' );
+$myNonces = new MY_WP_Nonces( 'my_nonce_action' );
 ```
 
 ### Creating Nonce
@@ -55,16 +55,38 @@ $myNonce->getNonceUrl( $target_url, 'the_name_of_nonce' );
 
 ---------------
 
-### Checking if the referred user has valid nonce
+### Check if the referred user has valid nonce
 
 ```php
-$myNonce->checkAdminReferer( '_security' );
+$query_arg = '_security';
+$myNonce->checkAdminReferer( $query_arg );
 ```
 *1 Parameter is optional*
 
 **Help:** [check_admin_referer()](https://developer.wordpress.org/reference/functions/check_admin_referer)
 
 --------------
+
+### Check if Ajax Request has a valid nonce
+
+```php
+$query_arg = '_security';
+$die = true;
+$myNonce->checkAjaxReferer( $query_arg, $die );
+```
+*2 Parameters are optional*
+
+**Help:** [check_ajax_referer()](https://developer.wordpress.org/reference/functions/check_ajax_referer)
+
+--------------
+
+### Returning "Are you sure?" Message
+
+```php
+$myNonce->areYouSure();
+```
+
+**Help:** [wp_nonce_ays()](https://developer.wordpress.org/reference/functions/wp_nonce_ays)
 
 ## Whats missing currently?
 
