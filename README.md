@@ -2,12 +2,25 @@
 
 [![Build Status](https://travis-ci.org/h-ARTS/Mywpnonces.svg?branch=master)](https://travis-ci.org/h-ARTS/Mywpnonces)
 
-MYWPNonces is a Library with WordPress Nonce functions in object-oriented way!
+MYWPNonces is a Library with WordPress Nonce functions in object-oriented way.
 
+## How to use
 
-## Status
+Declare a new instance:
+```php
+$myNonces = new MY_WP_Nonces( 'myAction' );
+```
 
-Work in Progess...
+#### Creating Nonce
+
+```php
+$myNonces->createNonce();
+```
+
+#### Creating a Nonce Field
+```php
+$myNonce->getNonceField( 'the_name_of_nonce', true , true );
+```
 
 ## Whats missing currently?
 
