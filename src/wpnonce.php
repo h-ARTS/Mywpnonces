@@ -24,21 +24,21 @@ namespace Mywpnonces\src\wpnonce;
  * @since 0.0.1
  */
 class MY_WP_Nonces {
-	
-	/**
+
+    /**
      * Action name
      *
      * @access  private
      * @var     string  $action     Name of the action.
      */
-	private $action;
+     private $action;
 	
     /**
      * Initializes the name of the action.
      *
      * @param   string  $action     Name of the action.
      */
-	public function __contruct( $action ) {
+     public function __contruct( $action ) {
 		
 		$this->action = $action;
 		
@@ -62,7 +62,7 @@ class MY_WP_Nonces {
      *
      * @return  string  Nonce generated.
      */
-	public function createNonce() {
+     public function createNonce() {
 		
 		if( ! function_exists( 'wp_create_nonce' ) ) {
 			return false;
@@ -83,7 +83,7 @@ class MY_WP_Nonces {
      *
      * @return  string|bool         Hidden Input field with nonce as HTML markup | false
      */
-	public function getNonceField( $name = '_wpnonce', $referer = true, $echo = true ) {
+     public function getNonceField( $name = '_wpnonce', $referer = true, $echo = true ) {
 		
 		if( ! function_exists( 'wp_nonce_field') || empty( $name ) || !is_string( $name ) ) {
 			return false;
@@ -100,9 +100,9 @@ class MY_WP_Nonces {
      *
      * @param   string      $nonce  The nonce used in the form.
      *
-     * @return  bool|int            Returns false if it's invalid or an integer between 1-2 if it's valid.
+     * @return  bool|int            false if it's invalid or 1 or 2 if it's valid.
      */
-	public function verifyNonce( $nonce ) {
+     public function verifyNonce( $nonce ) {
 		
 		if( ! function_exists( 'wp_verify_nonce') || empty( $nonce ) || !is_string( $nonce ) ) {
 			return false;
@@ -122,7 +122,7 @@ class MY_WP_Nonces {
      *
      * @return  string              URL with generated nonce added.
      */
-	public function getNonceUrl( $actionurl, $name = '_wpnonce') {
+     public function getNonceUrl( $actionurl, $name = '_wpnonce') {
 		
 		if( ! function_exists( 'wp_nonce_url' ) || empty($actionurl) || !is_string( $actionurl ) ) {
 			return false;
@@ -132,7 +132,16 @@ class MY_WP_Nonces {
 		
 	}
 	
-	public function checkAdminReferer( $query_arg = '_wpnonce' ) {
+    /**
+     * Verifies for a valid nonce of the current referred user.
+     *
+     * @link https://developer.wordpress.org/reference/functions/check_admin_referer
+     *
+     * @param   string      $query_arg  The action name used as a key.
+     *
+     * @return  bool|int                false if it's invalid or 1 or 2 if it's valid.
+     */
+     public function checkAdminReferer( $query_arg = '_wpnonce' ) {
 		
 		if( ! function_exists( 'check_admin_referer' ) ) {
 			return false;
@@ -142,7 +151,17 @@ class MY_WP_Nonces {
 		
 	}
 	
-	public function checkAjaxReferer( $query_arg = false, $die = true ) {
+    /**
+     * Verifies for a valid nonce in the ajax request.
+     *
+     * @link https://developer.wordpress.org/reference/functions/check_ajax_referer
+     *
+     * @param   bool|string $query_arg  The action name used as a key.
+     * @param   bool        $die        Die early if the nonce cannot be verified.
+     *
+     * @return  bool|int                false if it's invalid or 1 or 2 if it's valid.
+     */
+     public function checkAjaxReferer( $query_arg = false, $die = true ) {
 		
 		if( ! function_exists( 'check_ajax_referer' ) ) {
 			return false;
@@ -151,7 +170,13 @@ class MY_WP_Nonces {
 		return check_ajax_referer( $this->action, $query_arg, $die );
 		
 	}
-	
+
+	/**
+     * Displays a page with Are you sure? message.
+     *
+     * @link https://developer.wordpress.org/reference/functions/wp_nonce_ays
+     *
+     */
 	public function areYouSure() {
 		
 		if( ! function_exists( 'wp_nonce_ays' ) ) {
