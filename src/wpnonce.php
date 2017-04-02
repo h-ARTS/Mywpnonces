@@ -37,9 +37,9 @@ class MY_WP_Nonces {
      * @param   string  $action     Name of the action.
      */
      public function __contruct( $action ) {
-		
-		$this->action = $action;
-		
+         
+         $this->action = $action;
+     
      }
 	
     /**
@@ -48,9 +48,9 @@ class MY_WP_Nonces {
      * @return  string  private action variable.
      */
      public function the_action() {
-		
-		return $this->action;
-		
+         
+         return $this->action;
+     
      }
 	
     /**
@@ -61,12 +61,12 @@ class MY_WP_Nonces {
      * @return  string  Nonce generated.
      */
      public function createNonce() {
-		
-		if( ! function_exists( 'wp_create_nonce' ) ) {
-			return false;
-		}
-		
-		return wp_create_nonce( $this->action );
+         
+         if( ! function_exists( 'wp_create_nonce' ) ) {
+             return false;
+         }
+         
+         return wp_create_nonce( $this->action );
 		
      }
 	
@@ -82,13 +82,13 @@ class MY_WP_Nonces {
      * @return  string|bool         Hidden Input field with nonce as HTML markup | false
      */
      public function getNonceField( $name = '_wpnonce', $referer = true, $echo = true ) {
-		
-		if( ! function_exists( 'wp_nonce_field') || empty( $name ) || !is_string( $name ) ) {
-			return false;
-		}
-		
-		return wp_nonce_field( $this->action, $name, $referer, $echo );
-
+         
+         if( ! function_exists( 'wp_nonce_field') || empty( $name ) || !is_string( $name ) ) {
+             return false;
+         }
+         
+         return wp_nonce_field( $this->action, $name, $referer, $echo );
+     
      }
 	
     /**
@@ -101,13 +101,13 @@ class MY_WP_Nonces {
      * @return  bool|int            false if it's invalid or 1 or 2 if it's valid.
      */
      public function verifyNonce( $nonce ) {
-		
-		if( ! function_exists( 'wp_verify_nonce') || empty( $nonce ) || !is_string( $nonce ) ) {
-			return false;
-		}
-		
-		return wp_verify_nonce( $nonce, $this->action );
-		
+         
+         if( ! function_exists( 'wp_verify_nonce') || empty( $nonce ) || !is_string( $nonce ) ) {
+             return false;
+         }
+         
+         return wp_verify_nonce( $nonce, $this->action );
+     
      }
 	
     /**
@@ -121,13 +121,13 @@ class MY_WP_Nonces {
      * @return  string              URL with generated nonce added.
      */
      public function getNonceUrl( $actionurl, $name = '_wpnonce') {
-		
-		if( ! function_exists( 'wp_nonce_url' ) || empty($actionurl) || !is_string( $actionurl ) ) {
-			return false;
-		}
-		
-		return wp_nonce_url( $actionurl, $this->action, $name );
-		
+         
+         if( ! function_exists( 'wp_nonce_url' ) || empty($actionurl) || !is_string( $actionurl ) ) {
+             return false;
+         }
+         
+         return wp_nonce_url( $actionurl, $this->action, $name );
+     
      }
 	
     /**
@@ -140,13 +140,13 @@ class MY_WP_Nonces {
      * @return  bool|int                false if it's invalid or 1 or 2 if it's valid.
      */
      public function checkAdminReferer( $query_arg = '_wpnonce' ) {
-		
-		if( ! function_exists( 'check_admin_referer' ) ) {
-			return false;
-		}
-		
-		return check_admin_referer( $this->action, $query_arg );
-		
+         
+         if( ! function_exists( 'check_admin_referer' ) ) {
+             return false;
+         }
+         
+         return check_admin_referer( $this->action, $query_arg );
+     
      }
 	
     /**
@@ -163,10 +163,10 @@ class MY_WP_Nonces {
          
          if( ! function_exists( 'check_ajax_referer' ) ) {
              return false;
-        }
-		
-		return check_ajax_referer( $this->action, $query_arg, $die );
-		
+         }
+         
+         return check_ajax_referer( $this->action, $query_arg, $die );
+     
      }
 
     /**
@@ -176,13 +176,13 @@ class MY_WP_Nonces {
      *
      */
      public function areYouSure() {
-		
-		if( ! function_exists( 'wp_nonce_ays' ) ) {
-			return false;
-		}
-		
-		return wp_nonce_ays( $this->action );
-		
+         
+         if( ! function_exists( 'wp_nonce_ays' ) ) {
+             return false;
+         }
+         
+         return wp_nonce_ays( $this->action );
+     
      }
 	
 }
