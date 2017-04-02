@@ -49,11 +49,11 @@ class MY_WP_Nonces {
      *
      * @return  string  private action variable.
      */
-	public function the_action() {
+     public function the_action() {
 		
 		return $this->action;
 		
-	}
+    }
 	
     /**
      * Generates and returns a nonce.
@@ -177,7 +177,7 @@ class MY_WP_Nonces {
      * @link https://developer.wordpress.org/reference/functions/wp_nonce_ays
      *
      */
-	public function areYouSure() {
+     public function areYouSure() {
 		
 		if( ! function_exists( 'wp_nonce_ays' ) ) {
 			return false;
@@ -185,7 +185,7 @@ class MY_WP_Nonces {
 		
 		return wp_nonce_ays( $this->action );
 		
-	}
+    }
 	
 }
 
