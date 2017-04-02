@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * MYWPNonces is a Library of wp_nonce_* functions in object-oriented environment
+ *
+ * This is a Library to provide an easy to use WordPress Nonce 
+ * function for the sake of simplicity.
+ *
+ * @link https://github.com/h-ARTS/Mywpnonces
+ *
+ * @since 0.0.1
+ *
+ * @package MYWPNonces
+ *
+ */
+
 namespace Mywpnonces\src\wpnonce;
 
 class MY_WP_Nonces {
