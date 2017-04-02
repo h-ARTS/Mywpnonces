@@ -29,14 +29,14 @@ class MY_WP_Nonces {
      * Action name
      *
      * @access  private
-     * @var     String  $action Name of the action.
+     * @var     string  $action     Name of the action.
      */
 	private $action;
 	
     /**
      * Initializes the name of the action.
      *
-     * @param   String  $action Name of the action.
+     * @param   string  $action     Name of the action.
      */
 	public function __contruct( $action ) {
 		
@@ -47,7 +47,7 @@ class MY_WP_Nonces {
     /**
      * Gets the private action variable
      *
-     * @return  String  private action variable.
+     * @return  string  private action variable.
      */
 	public function the_action() {
 		
@@ -60,7 +60,7 @@ class MY_WP_Nonces {
      *
      * @link https://codex.wordpress.org/Function_Reference/wp_create_nonce
      *
-     * @return  String  Nonce generated.
+     * @return  string  Nonce generated.
      */
 	public function createNonce() {
 		
@@ -77,11 +77,11 @@ class MY_WP_Nonces {
      *
      * @link https://developer.wordpress.org/reference/functions/wp_nonce_field
      *
-     * @param   String  $name       Specific nonce name.
+     * @param   string  $name       Specific nonce name.
      * @param   bool    $referer    Sets the referer field for validation.
      * @param   bool    $echo       Either it displays the hidden form field or it returns.
      *
-     * @return  String|bool  Hidden Input field with nonce as HTML markup | false
+     * @return  string|bool         Hidden Input field with nonce as HTML markup | false
      */
 	public function getNonceField( $name = '_wpnonce', $referer = true, $echo = true ) {
 		
@@ -93,6 +93,15 @@ class MY_WP_Nonces {
 		
 	}
 	
+    /**
+     * Verifies the nonce with time limit.
+     *
+     * @link https://developer.wordpress.org/reference/functions/wp_verify_nonce
+     *
+     * @param   string      $nonce  The nonce used in the form.
+     *
+     * @return  bool|int            Returns false if it's invalid or an integer between 1-2 if it's valid.
+     */
 	public function verifyNonce( $nonce ) {
 		
 		if( ! function_exists( 'wp_verify_nonce') || empty( $nonce ) || !is_string( $nonce ) ) {
@@ -103,6 +112,16 @@ class MY_WP_Nonces {
 		
 	}
 	
+    /**
+     * Returns a URL with nonce added.
+     *
+     * @link https://developer.wordpress.org/reference/functions/wp_nonce_url
+     *
+     * @param   string  $actionurl  Target url as a string.
+     * @param   string  $name       Specific nonce name.
+     *
+     * @return  string              URL with generated nonce added.
+     */
 	public function getNonceUrl( $actionurl, $name = '_wpnonce') {
 		
 		if( ! function_exists( 'wp_nonce_url' ) || empty($actionurl) || !is_string( $actionurl ) ) {
