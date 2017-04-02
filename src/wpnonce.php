@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * MYWPNonces is a Library of WordPress Nonce functions in object-oriented environment
  *
@@ -171,7 +169,7 @@ class MY_WP_Nonces {
 		
 	}
 
-	/**
+    /**
      * Displays a page with Are you sure? message.
      *
      * @link https://developer.wordpress.org/reference/functions/wp_nonce_ays
