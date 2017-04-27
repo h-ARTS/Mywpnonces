@@ -11,26 +11,20 @@
  *
  * @package MYWPNonces
  */
-
 namespace Mywpnonces\src\wpnonce;
-
-
-
 /**
  * MY_WP_Nonces class.
  *
  * @since 0.0.1
  */
 class MY_WP_Nonces {
-
     /**
      * Action name
      *
      * @access  private
      * @var     string  $action     Name of the action.
      */
-     private $action;
-	
+     private $action;	
     /**
      * Initializes the name of the action.
      *
@@ -40,8 +34,7 @@ class MY_WP_Nonces {
          
          $this->action = $action;
      
-     }
-	
+     }	
     /**
      * Gets the private action variable
      *
@@ -52,7 +45,6 @@ class MY_WP_Nonces {
          return $this->action;
      
      }
-	
     /**
      * Generates and returns a nonce.
      *
@@ -69,7 +61,6 @@ class MY_WP_Nonces {
          return wp_create_nonce( $this->action );
 		
      }
-	
     /**
      * Creates a hidden nonce input field for forms
      *
@@ -90,7 +81,6 @@ class MY_WP_Nonces {
          return wp_nonce_field( $this->action, $name, $referer, $echo );
      
      }
-	
     /**
      * Verifies the nonce with time limit.
      *
@@ -109,7 +99,6 @@ class MY_WP_Nonces {
          return wp_verify_nonce( $nonce, $this->action );
      
      }
-	
     /**
      * Returns a URL with nonce added.
      *
@@ -129,7 +118,6 @@ class MY_WP_Nonces {
          return wp_nonce_url( $actionurl, $this->action, $name );
      
      }
-	
     /**
      * Verifies for a valid nonce of the current referred user.
      *
@@ -148,7 +136,6 @@ class MY_WP_Nonces {
          return check_admin_referer( $this->action, $query_arg );
      
      }
-	
     /**
      * Verifies for a valid nonce in the ajax request.
      *
@@ -168,7 +155,6 @@ class MY_WP_Nonces {
          return check_ajax_referer( $this->action, $query_arg, $die );
      
      }
-
     /**
      * Displays a page with Are you sure? message.
      *
@@ -186,5 +172,4 @@ class MY_WP_Nonces {
      }
 	
 }
-
 ?>
